@@ -21,8 +21,8 @@ lvim.plugins = {
   "terryma/vim-multiple-cursors",
   {
     "ThePrimeagen/refactoring.nvim",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     }
   },
   {
@@ -36,7 +36,8 @@ lvim.plugins = {
       })
     end
   },
-  "stevearc/dressing.nvim"
+  "stevearc/dressing.nvim",
+  "wakatime/vim-wakatime"
 }
 
 lvim.builtin.which_key.mappings["C"] = {
@@ -76,10 +77,6 @@ linters.setup {
   },
   { name = "xo" },
   {
-    name = "psalm",
-    filetypes = { "php" }
-  },
-  {
     name = "revive",
     filetypes = { "go" }
   }
@@ -94,4 +91,4 @@ code_actions.setup {
 }
 
 lvim.format_on_save.enabled = true
-lvim.format_on_save.pattern = { "*.lua", "*.py", "*.php", "*.js", "*.ts", "*.vue", "*.go" }
+lvim.format_on_save.pattern = { "*.lua", "*.py", "*.php", "!*.blade.php", "*.js", "*.ts", "*.vue", "*.go" }
