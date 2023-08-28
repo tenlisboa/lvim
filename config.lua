@@ -5,6 +5,9 @@
 
 lvim.colorscheme = "OceanicNext"
 
+vim.o.clipboard = "unnamedplus"
+lvim.reload_config_on_save = true
+
 -- Buffering
 lvim.keys.normal_mode["<leader>x"] = ":BufferKill<CR>"
 lvim.keys.normal_mode["<leader>c"] = false
@@ -21,7 +24,30 @@ lvim.plugins = {
     requires = {
       { "nvim-lua/plenary.nvim" },
     }
-  }
+  },
+  {
+    "AckslD/swenv.nvim",
+    config = function()
+      require("swenv").setup({
+        venvs_path = vim.fn.expand('~/.cache/pypoetry/virtualenvs'),
+        post_set_venv = function()
+          vim.cmd("LspRestart")
+        end
+      })
+    end
+  },
+  "stevearc/dressing.nvim"
+}
+
+lvim.builtin.which_key.mappings["C"] = {
+  name = "Python",
+  c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Venv" }
+}
+
+lvim.builtin.treesitter.ensure_installed = {
+  "python",
+  "php",
+  "go"
 }
 
 -- Formatters
@@ -31,12 +57,17 @@ formatters.setup {
     name = "prettier",
     filetype = { "typescript", "typescriptreact" }
   },
+  {
+    name = "black",
+    filetype = "python"
+  }
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
     name = "flake8",
+    args = { "--ignore=E203" },
     filetypes = { "python" }
   },
   {
@@ -44,8 +75,14 @@ linters.setup {
     args = { "--severity", "warning" }
   },
   { name = "xo" },
-  { name = "psalm" },
-  { name = "revive" }
+  {
+    name = "psalm",
+    filetypes = { "php" }
+  },
+  {
+    name = "revive",
+    filetypes = { "go" }
+  }
 }
 
 local code_actions = require "lvim.lsp.null-ls.code_actions"
