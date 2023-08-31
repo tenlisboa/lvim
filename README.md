@@ -7,7 +7,7 @@ mv ~/.config/lvim ~/.config/lvim-bkp
 or (Without Backup)
 
 ```bash
-rm -ls ~/.config/lvim
+rm -rf ~/.config/lvim
 ```
 
 Now, you can download it
