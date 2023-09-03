@@ -12,6 +12,9 @@ lvim.reload_config_on_save = true
 lvim.keys.normal_mode["<leader>x"] = ":BufferKill<CR>"
 lvim.keys.normal_mode["<leader>c"] = false
 
+lvim.keys.normal_mode["<leader>vs"] = ":vsplit<CR>"
+lvim.keys.normal_mode["<leader>hs"] = ":split<CR>"
+
 -- Terminal
 lvim.builtin.terminal.open_mapping = "<c-t>"
 
@@ -51,12 +54,28 @@ lvim.builtin.treesitter.ensure_installed = {
   "go"
 }
 
+lvim.lsp.automatic_servers_installation = false
+
+lvim.builtin.mason.ensure_installed = {
+  "prettier",
+  "eslint_d",
+  "phpactor",
+  "gopls",
+  "revive",
+  "shellcheck",
+  "black",
+  "flake8",
+  "refactoring"
+}
+
+-- Globals
+local jsDevFiles = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" }
 -- Formatters
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
     name = "prettier",
-    filetype = { "typescript", "typescriptreact" }
+    filetypes = jsDevFiles
   },
   {
     name = "black",
@@ -75,10 +94,13 @@ linters.setup {
     name = "shellcheck",
     args = { "--severity", "warning" }
   },
-  { name = "xo" },
   {
     name = "revive",
     filetypes = { "go" }
+  },
+  {
+    name = "eslint_d",
+    filetypes = jsDevFiles
   }
 }
 
@@ -91,4 +113,4 @@ code_actions.setup {
 }
 
 lvim.format_on_save.enabled = true
-lvim.format_on_save.pattern = { "*.lua", "*.py", "*.php", "!*.blade.php", "*.js", "*.ts", "*.vue", "*.go" }
+lvim.format_on_save.pattern = { "*.tsx", "*.lua", "*.py", "*.php", "!*.blade.php", "*.js", "*.ts", "*.vue", "*.go" }
