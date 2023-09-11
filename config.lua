@@ -3,7 +3,7 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
-lvim.colorscheme = "OceanicNext"
+lvim.colorscheme = "oh-lucy-evening"
 
 vim.o.clipboard = "unnamedplus"
 lvim.reload_config_on_save = true
@@ -20,7 +20,7 @@ lvim.builtin.terminal.open_mapping = "<c-t>"
 
 -- Plugins Here
 lvim.plugins = {
-  "mhartington/oceanic-next",
+  "Yazeed1s/oh-lucy.nvim",
   "terryma/vim-multiple-cursors",
   {
     "ThePrimeagen/refactoring.nvim",
@@ -40,7 +40,13 @@ lvim.plugins = {
     end
   },
   "stevearc/dressing.nvim",
-  "wakatime/vim-wakatime"
+  "wakatime/vim-wakatime",
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup({})
+    end
+  },
 }
 
 lvim.builtin.which_key.mappings["C"] = {
@@ -93,6 +99,11 @@ linters.setup {
   {
     name = "shellcheck",
     args = { "--severity", "warning" }
+  },
+  { name = "eslint_d" },
+  {
+    name = "psalm",
+    filetypes = { "php" }
   },
   {
     name = "revive",
