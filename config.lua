@@ -15,6 +15,16 @@ lvim.keys.normal_mode["<leader>c"] = false
 lvim.keys.normal_mode["<leader>vs"] = ":vsplit<CR>"
 lvim.keys.normal_mode["<leader>hs"] = ":split<CR>"
 
+-- Copy
+lvim.keys.visual_mode["<C-c>"] = '"+y'
+
+-- Cut
+lvim.keys.visual_mode["<C-x>"] = '"+c'
+
+-- Paste
+lvim.keys.visual_mode["<C-v>"] = '"+p'
+lvim.keys.normal_mode["<C-v>"] = '"+p'
+
 -- Terminal
 lvim.builtin.terminal.open_mapping = "<c-t>"
 
